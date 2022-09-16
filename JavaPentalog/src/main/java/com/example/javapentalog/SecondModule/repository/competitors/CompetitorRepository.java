@@ -1,4 +1,9 @@
 package com.example.javapentalog.SecondModule.repository.competitors;
 
-public interface CompetitorRepository {
+import org.springframework.data.repository.CrudRepository;
+
+import java.util.Optional;
+
+public interface CompetitorRepository extends CrudRepository<Competitor,Integer> {
+    Optional<Competitor> findByName (String name);
 }
