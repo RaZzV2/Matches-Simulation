@@ -1,5 +1,7 @@
 package com.example.javapentalog.SecondModule.services.impl;
 
+import com.example.javapentalog.SecondModule.repository.competitors.Competitor;
+import com.example.javapentalog.SecondModule.repository.competitors.CompetitorRepository;
 import com.example.javapentalog.SecondModule.repository.matches.Match;
 import com.example.javapentalog.SecondModule.repository.teams.Team;
 import com.example.javapentalog.SecondModule.repository.teams.TeamRepository;
@@ -17,10 +19,21 @@ import java.util.List;
 public class TeamServiceImpl implements TeamService {
 
     private final TeamRepository teamRepository;
+    private final CompetitorRepository competitorRepository;
 
     @Override
     public Team addTeam(@Valid Team team) {
         return teamRepository.save(team);
+    }
+
+    @Override
+    public Team addCompetitorToTeam(String teamName, String competitorName) {
+        Team actualTeam = teamRepository.findByTeamName(teamName).orElseThrow( () -> new RuntimeException("Team not found"));
+        Competitor actualCompetitor = competitorRepository.findByName(competitorName).orElseThrow( () -> new RuntimeException("Competitor not found"));
+        List<Competitor> myList = actualTeam.getCompetitors();
+        myList.add(actualCompetitor);
+        actualTeam.setCompetitors(myList);
+        return teamRepository.save(actualTeam);
     }
 
     @Override

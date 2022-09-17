@@ -38,6 +38,11 @@ public class TeamController {
         return ResponseEntity.ok(teamService.getTeamByName(name));
     }
 
+    @PutMapping("/test/{teamName}/{competitorName}")
+    public ResponseEntity<Team> addCompetitorToTeam(@PathVariable final String teamName, @PathVariable final String competitorName){
+        return ResponseEntity.ok(teamService.addCompetitorToTeam(teamName,competitorName));
+    }
+
     @PutMapping(value = "/{id}")
     public Team updateTeam (@PathVariable final Integer id,@RequestBody Team team) {
         return teamService.updateTeamById(id, team);

@@ -9,6 +9,8 @@ import java.util.List;
 public interface TeamService {
     Team addTeam(@Valid Team team);
 
+    Team addCompetitorToTeam(@NotNull String teamName, @NotNull String competitorName);
+
     Team getTeamById(@NotNull Integer id);
 
     Team getTeamByName(@NotNull String name);
