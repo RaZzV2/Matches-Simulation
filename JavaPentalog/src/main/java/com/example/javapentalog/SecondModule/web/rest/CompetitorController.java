@@ -3,10 +3,12 @@ package com.example.javapentalog.SecondModule.web.rest;
 import com.example.javapentalog.SecondModule.repository.competitors.Competitor;
 import com.example.javapentalog.SecondModule.services.CompetitorService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/competitors")
@@ -22,11 +24,16 @@ public class CompetitorController {
         return ResponseEntity.ok(competitorService.getCompetitorById(id));
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<List<Competitor>>getAllCompetitors(){
+        List<Competitor> competitors = competitorService.findAllCompetitors();
+        return ResponseEntity.ok(competitors);
+    }
 
-    @GetMapping(value = "/{name}", params = "name")
-    public Competitor getCompetitor (@PathVariable final String name) {
+    @GetMapping("/after/{name}")
+    public ResponseEntity<Competitor> getCompetitor (@PathVariable final String name) {
 
-        return competitorService.getCompetitorByName(name);
+        return ResponseEntity.ok(competitorService.getCompetitorByName(name));
     }
 
     @PostMapping
@@ -48,7 +55,6 @@ public class CompetitorController {
 
         return competitorService.patchCompetitorById(id, competitor);
     }
-
 
     @DeleteMapping(value = "/{id}")
     public void deleteCompetitor (@PathVariable final Integer id) {

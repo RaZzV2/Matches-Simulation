@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -25,7 +26,6 @@ public class CompetitorServiceImpl implements CompetitorService {
     public Competitor getCompetitorById(@NotNull Integer id) {
         return competitorRepository.findById(id).orElseThrow(() -> new RuntimeException("Competitor not found"));
     }
-
     @Override
     public Competitor getCompetitorByName(@NotNull String name) {
         return competitorRepository.findByName(name).orElseThrow(() -> new RuntimeException("Competitor not found"));
@@ -53,6 +53,11 @@ public class CompetitorServiceImpl implements CompetitorService {
         }
 
         return competitorRepository.save(competitorToUpdate);
+    }
+
+    @Override
+    public List<Competitor> findAllCompetitors() {
+        return (List<Competitor>) competitorRepository.findAll();
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.example.javapentalog.SecondModule.repository.matches;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 
