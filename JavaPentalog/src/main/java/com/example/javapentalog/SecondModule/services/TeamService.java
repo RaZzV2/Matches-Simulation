@@ -11,6 +11,8 @@ public interface TeamService {
 
     Team addCompetitorToTeam(@NotNull String teamName, @NotNull String competitorName);
 
+    Team removeCompetitorFromTeam(@NotNull String teamName, @NotNull String competitorName);
+
     Team getTeamById(@NotNull Integer id);
 
     Team getTeamByName(@NotNull String name);

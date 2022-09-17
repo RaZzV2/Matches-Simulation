@@ -37,6 +37,16 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
+    public Team removeCompetitorFromTeam(String teamName, String competitorName) {
+        Team actualTeam = teamRepository.findByTeamName(teamName).orElseThrow( () -> new RuntimeException("Team not found"));
+        Competitor actualCompetitor = competitorRepository.findByName(competitorName).orElseThrow( () -> new RuntimeException("Competitor not found"));
+        List<Competitor> myList = actualTeam.getCompetitors();
+        myList.remove(actualCompetitor);
+        actualTeam.setCompetitors(myList);
+        return teamRepository.save(actualTeam);
+    }
+
+    @Override
     public Team getTeamById(@NotNull Integer id) {
         return teamRepository.findById(id).orElseThrow(() -> new RuntimeException("Team not found"));
     }
