@@ -1,10 +1,8 @@
 package com.example.javapentalog.SecondModule.web.rest;
 
-import com.example.javapentalog.SecondModule.repository.competitors.Competitor;
 import com.example.javapentalog.SecondModule.repository.matches.Match;
 import com.example.javapentalog.SecondModule.services.MatchService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,6 +40,7 @@ public class MatchController {
         return ResponseEntity.ok(matchService.getMatchByName(name));
     }
 
+    @PutMapping(value = "/{id}")
     public Match updateMatch (@PathVariable final Integer id,@RequestBody Match match) {
 
         return matchService.updateMatchById(id, match);
