@@ -1,4 +1,4 @@
-package com.example.javapentalog.SecondModule.web.rest;
+package com.example.javapentalog.SecondModule.web;
 
 import com.example.javapentalog.SecondModule.repository.competitors.Competitor;
 import com.example.javapentalog.SecondModule.services.CompetitorService;
@@ -24,11 +24,11 @@ public class CompetitorController {
         return ResponseEntity.ok(competitorService.getCompetitorById(id));
     }
 
-    @GetMapping("/all")
+    /*@GetMapping("/all")
     public ResponseEntity<List<Competitor>>getAllCompetitors(){
         List<Competitor> competitors = competitorService.findAllCompetitors();
         return ResponseEntity.ok(competitors);
-    }
+    }*/
 
     @GetMapping("/after/{name}")
     public ResponseEntity<Competitor> getCompetitor (@PathVariable final String name) {

@@ -1,4 +1,4 @@
-package com.example.javapentalog.SecondModule.web.rest;
+package com.example.javapentalog.SecondModule.web;
 
 import com.example.javapentalog.SecondModule.repository.matches.Match;
 import com.example.javapentalog.SecondModule.services.MatchService;

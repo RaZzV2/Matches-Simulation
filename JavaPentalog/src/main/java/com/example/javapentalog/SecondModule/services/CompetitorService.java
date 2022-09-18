@@ -1,6 +1,8 @@
 package com.example.javapentalog.SecondModule.services;
 
+import com.example.javapentalog.SecondModule.model.PageRequestTest;
 import com.example.javapentalog.SecondModule.repository.competitors.Competitor;
+import org.springframework.data.domain.Page;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -18,7 +20,7 @@ public interface CompetitorService {
 
     Competitor patchCompetitorById(@NotNull Integer id, Competitor competitor);
 
-    List<Competitor> findAllCompetitors();
+    Page<Competitor> findAllCompetitors(PageRequestTest pageRequestTest);
 
     void deleteCompetitorById(@NotNull Integer id);
 
