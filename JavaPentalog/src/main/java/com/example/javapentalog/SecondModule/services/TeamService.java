@@ -9,6 +9,10 @@ import java.util.List;
 public interface TeamService {
     Team addTeam(@Valid Team team);
 
+    Team addMatchToTeam(@NotNull String teamName, @NotNull String matchName);
+
+    Team removeMatchFromTeam(@NotNull String teamName, @NotNull String matchName);
+
     Team addCompetitorToTeam(@NotNull String teamName, @NotNull String competitorName);
 
     Team removeCompetitorFromTeam(@NotNull String teamName, @NotNull String competitorName);

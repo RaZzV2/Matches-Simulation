@@ -38,6 +38,16 @@ public class TeamController {
         return ResponseEntity.ok(teamService.getTeamByName(name));
     }
 
+    @PutMapping("/addmatch/{teamName}/{matchName}")
+    public ResponseEntity<Team> addMatchToTeam(@PathVariable final String teamName, @PathVariable final String matchName){
+        return ResponseEntity.ok(teamService.addMatchToTeam(teamName,matchName));
+    }
+
+    @PutMapping("/removematch/{teamName}/{matchName}")
+    public ResponseEntity<Team> removeMatchFromTeam(@PathVariable final String teamName, @PathVariable final String matchName){
+        return ResponseEntity.ok(teamService.removeMatchFromTeam(teamName,matchName));
+    }
+
     @PutMapping("/addcomp/{teamName}/{competitorName}")
     public ResponseEntity<Team> addCompetitorToTeam(@PathVariable final String teamName, @PathVariable final String competitorName){
         return ResponseEntity.ok(teamService.addCompetitorToTeam(teamName,competitorName));

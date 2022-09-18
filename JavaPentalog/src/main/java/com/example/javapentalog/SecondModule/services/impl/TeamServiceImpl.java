@@ -3,10 +3,12 @@ package com.example.javapentalog.SecondModule.services.impl;
 import com.example.javapentalog.SecondModule.repository.competitors.Competitor;
 import com.example.javapentalog.SecondModule.repository.competitors.CompetitorRepository;
 import com.example.javapentalog.SecondModule.repository.matches.Match;
+import com.example.javapentalog.SecondModule.repository.matches.MatchRepository;
 import com.example.javapentalog.SecondModule.repository.teams.Team;
 import com.example.javapentalog.SecondModule.repository.teams.TeamRepository;
 import com.example.javapentalog.SecondModule.services.TeamService;
 import lombok.RequiredArgsConstructor;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
@@ -21,9 +23,33 @@ public class TeamServiceImpl implements TeamService {
     private final TeamRepository teamRepository;
     private final CompetitorRepository competitorRepository;
 
+    private final MatchRepository matchRepository;
+
     @Override
     public Team addTeam(@Valid Team team) {
         return teamRepository.save(team);
+    }
+
+    @Override
+    public Team addMatchToTeam(String teamName, String matchName) {
+        Team actualTeam = teamRepository.findByTeamName(teamName).orElseThrow(() -> new RuntimeException("Team not found"));
+        Match actualMatch = matchRepository.findByMatchName(matchName).orElseThrow(() -> new RuntimeException("Match not found"));
+        List<Match> matches = actualTeam.getMatches();
+        if(!matches.contains(actualMatch))
+            matches.add(actualMatch);
+        //else throw
+        actualTeam.setMatches(matches);
+        return teamRepository.save(actualTeam);
+    }
+
+    @Override
+    public Team removeMatchFromTeam(String teamName, String matchName) {
+        Team actualTeam = teamRepository.findByTeamName(teamName).orElseThrow(() -> new RuntimeException("Team not found"));
+        Match actualMatch = matchRepository.findByMatchName(matchName).orElseThrow(() -> new RuntimeException("Match not found"));
+        List<Match> matches = actualTeam.getMatches();
+        matches.remove(actualMatch);
+        actualTeam.setMatches(matches);
+        return teamRepository.save(actualTeam);
     }
 
     @Override
@@ -35,7 +61,6 @@ public class TeamServiceImpl implements TeamService {
         actualTeam.setCompetitors(myList);
         return teamRepository.save(actualTeam);
     }
-
     @Override
     public Team removeCompetitorFromTeam(String teamName, String competitorName) {
         Team actualTeam = teamRepository.findByTeamName(teamName).orElseThrow( () -> new RuntimeException("Team not found"));
@@ -45,6 +70,8 @@ public class TeamServiceImpl implements TeamService {
         actualTeam.setCompetitors(myList);
         return teamRepository.save(actualTeam);
     }
+
+
 
     @Override
     public Team getTeamById(@NotNull Integer id) {
