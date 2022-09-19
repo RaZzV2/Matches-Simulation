@@ -18,6 +18,8 @@ public interface CompetitorService {
 
     Competitor updateCompetitorById(@NotNull Integer id, @Valid Competitor competitor);
 
+    void save(Competitor competitor);
+
     Competitor patchCompetitorById(@NotNull Integer id, Competitor competitor);
 
     Page<Competitor> findAllCompetitors(PageRequestTest pageRequestTest);

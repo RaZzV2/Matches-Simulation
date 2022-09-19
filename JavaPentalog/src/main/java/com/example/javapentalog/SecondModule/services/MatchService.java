@@ -11,6 +11,8 @@ public interface MatchService {
 
     Match addMatch(@Valid Match match);
 
+    void save(@Valid Match match);
+
     Match getMatchById(@NotNull Integer id);
 
     Match getMatchByName(@NotNull String name);

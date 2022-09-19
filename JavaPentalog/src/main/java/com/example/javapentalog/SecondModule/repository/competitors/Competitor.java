@@ -1,12 +1,11 @@
 package com.example.javapentalog.SecondModule.repository.competitors;
 
+import com.example.javapentalog.SecondModule.repository.teams.Team;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Data
 @Accessors(chain = true)
@@ -22,12 +21,22 @@ public class Competitor {
 
     private Integer age;
 
+    private String team;
+
     public Integer getId() {
         return id;
     }
 
     public String getName() {
         return name;
+    }
+
+    public String getTeam() {
+        return team;
+    }
+
+    public void setTeam(String team) {
+        this.team = team;
     }
 
     public Integer getAge() {

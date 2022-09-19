@@ -43,7 +43,7 @@ public class CompetitorController {
         return ResponseEntity.created(URI.create("/api/v1/competitors/" + addedCompetitor.getId())).build();
     }
 
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "/updatecomp/{id}")
     public Competitor updateCompetitor (@PathVariable final Integer id,@RequestBody Competitor competitor) {
 
         return competitorService.updateCompetitorById(id, competitor);
@@ -56,7 +56,7 @@ public class CompetitorController {
         return competitorService.patchCompetitorById(id, competitor);
     }
 
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "/deletecomp/{id}")
     public void deleteCompetitor (@PathVariable final Integer id) {
 
        competitorService.deleteCompetitorById(id);

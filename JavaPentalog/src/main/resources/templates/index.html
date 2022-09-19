@@ -3,20 +3,35 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Competitors</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/tabelstyle.css}"/>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
 </head>
 <body>
-<table class="table">
-    <thead>
+<div class="container my-2" align="center">
+<h3>Competitors List</h3>
+    <a th:href="@{/addnew}" class="btn btn-primary btn-sm mb-3" >Add Competitor</a>
+    <a th:href="@{/addnewmatch}" class="btn btn-primary btn-sm mb-3" >Add Match</a>
+    <table style="width:80%" border="1"
+           class = "table table-striped table-responsive-md">
+<table class="styled-table">
     <tr>
         <th scope="col">Name</th>
         <th scope="col">Age</th>
+        <th scope="col">Team</th>
     </tr>
-    </thead>
     <tbody>
     <tr th:each="competitor: ${competitors}">
         <td th:text="${competitor.name}"></td>
         <td th:text="${competitor.age}"></td>
+        <td th:text="${competitor.team}"></td>
+        <td> <a th:href="@{/updatecomp/{id}(id=${competitor.id})}"
+                class="btn btn-primary">Update</a>
+            <a th:href="@{deletecomp/{id}(id=${competitor.id})}"
+               class="btn btn-danger">Delete</a>
     </tr>
     </tbody>
 </table>

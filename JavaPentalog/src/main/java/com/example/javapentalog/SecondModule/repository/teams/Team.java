@@ -4,6 +4,8 @@ import com.example.javapentalog.SecondModule.repository.competitors.Competitor;
 import com.example.javapentalog.SecondModule.repository.matches.Match;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.List;

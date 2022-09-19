@@ -44,6 +44,10 @@ public class CompetitorServiceImpl implements CompetitorService {
     }
 
     @Override
+    public void save(Competitor competitor){
+        competitorRepository.save(competitor);
+    }
+    @Override
     public Competitor patchCompetitorById(@NotNull Integer id, @Valid Competitor competitor) {
         Competitor competitorToUpdate = competitorRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Competitor not found"));

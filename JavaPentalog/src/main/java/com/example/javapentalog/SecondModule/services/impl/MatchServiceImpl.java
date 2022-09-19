@@ -1,5 +1,6 @@
 package com.example.javapentalog.SecondModule.services.impl;
 
+import com.example.javapentalog.SecondModule.repository.competitors.Competitor;
 import com.example.javapentalog.SecondModule.repository.matches.Match;
 import com.example.javapentalog.SecondModule.repository.matches.MatchRepository;
 import com.example.javapentalog.SecondModule.services.MatchService;
@@ -22,6 +23,10 @@ public class MatchServiceImpl  implements MatchService {
         return matchRepository.save(match);
     }
 
+    @Override
+    public void save(Match match){
+        matchRepository.save(match);
+    }
     @Override
     public Match getMatchById(@NotNull Integer id) {
         return matchRepository.findById(id).orElseThrow(() -> new RuntimeException("Match not found"));
