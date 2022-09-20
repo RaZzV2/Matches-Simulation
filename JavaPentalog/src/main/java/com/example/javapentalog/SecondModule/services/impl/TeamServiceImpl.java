@@ -31,6 +31,11 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
+    public void save(Team team) {
+        teamRepository.save(team);
+    }
+
+    @Override
     public Team addMatchToTeam(String teamName, String matchName) {
         Team actualTeam = teamRepository.findByTeamName(teamName).orElseThrow(() -> new RuntimeException("Team not found"));
         Match actualMatch = matchRepository.findByMatchName(matchName).orElseThrow(() -> new RuntimeException("Match not found"));

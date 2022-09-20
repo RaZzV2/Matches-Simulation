@@ -3,6 +3,7 @@ package com.example.javapentalog.SecondModule.web.rest;
 import com.example.javapentalog.SecondModule.model.PageRequestTest;
 import com.example.javapentalog.SecondModule.repository.competitors.Competitor;
 import com.example.javapentalog.SecondModule.repository.matches.Match;
+import com.example.javapentalog.SecondModule.repository.teams.Team;
 import com.example.javapentalog.SecondModule.services.impl.CompetitorServiceImpl;
 import com.example.javapentalog.SecondModule.services.impl.MatchServiceImpl;
 import com.example.javapentalog.SecondModule.services.impl.TeamServiceImpl;
@@ -47,6 +48,19 @@ public class ThymeleafController {
         Competitor competitor = new Competitor();
         model.addAttribute("competitors", competitor);
         return "create";
+    }
+
+    @GetMapping("/addnewteam")
+    public String addNewTeam(Model model){
+        Team team = new Team();
+        model.addAttribute("teams",team);
+        return "createteam";
+    }
+
+    @PostMapping("/addteam")
+    public String addTeam(@ModelAttribute("teams")Team team){
+        teamService.save(team);
+        return "redirect:/";
     }
 
     @GetMapping("/addnewmatch")
