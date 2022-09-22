@@ -8,10 +8,13 @@ import com.example.javapentalog.SecondModule.repository.matchteams.MatchTeam;
 import com.example.javapentalog.SecondModule.repository.matchteams.MatchTeamRepository;
 import com.example.javapentalog.SecondModule.repository.teams.Team;
 import com.example.javapentalog.SecondModule.repository.teams.TeamRepository;
+import com.example.javapentalog.SecondModule.services.MatchService;
 import com.example.javapentalog.SecondModule.services.MatchTeamService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.*;
 
 
@@ -72,6 +75,22 @@ public class MatchTeamServiceImpl implements MatchTeamService {
           return plannedMatches;
     }
 
+    public List<MatchTeam> simulateMatches() {
+        List<MatchTeam> all = (List<MatchTeam>) matchTeamRepository.findAll();
+        for(MatchTeam aux : all){
+            updateMatchTeamById(aux.getId());
+        }
+        return all;
+    }
+
+    @Override
+    public MatchTeam updateMatchTeamById(@NotNull Integer id){
+        MatchTeam matchTeamToUpdate = matchTeamRepository.findById(id).orElseThrow(() -> new RuntimeException("Planned match is not valid"));
+        Random random = new Random();
+        int x = random.nextInt(9);
+        matchTeamToUpdate.setScore(x);
+        return matchTeamRepository.save(matchTeamToUpdate);
+    }
 
     @Override
     public MatchTeam getMatchTeamById(Integer id) {
