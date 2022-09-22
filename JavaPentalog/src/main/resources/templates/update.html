@@ -16,13 +16,10 @@
 
   <form action="#" th:action="@{/save/{id}(id=${competitors.id})}" th:object="${competitors}"
         method="POST">
-    <input type="text" th:field="*{name}" placeholder="Competitor Name"
-           class="form-control mb-4 col-4"> <input type="text"
-                                                   th:field="*{age}" placeholder="Competitor Age"
-                                                   class="form-control mb-4 col-4">
-
-    <button type="submit" class="btn btn-info col-2">Save
-      Competitor</button>
+    <input type="text" th:field="*{name}" placeholder="Competitor Name" class="form-control mb-4 col-4">
+    <input type="text" th:field="*{age}" placeholder="Competitor Age" class="form-control mb-4 col-4">
+    <input type="text" th:field="*{team}" placeholder="Competitor Team" class="form-control mb-4 col-4">
+    <button type="submit" class="btn btn-info col-2">Save Competitor</button>
   </form>
 
   <hr>

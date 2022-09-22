@@ -1,16 +1,22 @@
 package com.example.javapentalog.SecondModule.web.rest;
 
 import com.example.javapentalog.SecondModule.model.PageRequestTest;
+import com.example.javapentalog.SecondModule.repository.matches.MatchRepository;
+import com.example.javapentalog.SecondModule.repository.matchteams.MatchTeam;
 import com.example.javapentalog.SecondModule.repository.competitors.Competitor;
 import com.example.javapentalog.SecondModule.repository.matches.Match;
+import com.example.javapentalog.SecondModule.repository.matchteams.MatchTeamRepository;
 import com.example.javapentalog.SecondModule.repository.teams.Team;
 import com.example.javapentalog.SecondModule.services.impl.CompetitorServiceImpl;
 import com.example.javapentalog.SecondModule.services.impl.MatchServiceImpl;
+import com.example.javapentalog.SecondModule.services.impl.MatchTeamServiceImpl;
 import com.example.javapentalog.SecondModule.services.impl.TeamServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @Controller
@@ -23,11 +29,27 @@ public class ThymeleafController {
 
     private final TeamServiceImpl teamService;
 
+    private final MatchTeamServiceImpl matchTeamService;
+
     @GetMapping("/")
     public String viewHomePage(Model model){
         PageRequestTest pageRequest = new PageRequestTest(0,20);
         model.addAttribute("competitors",competitorService.findAllCompetitors(pageRequest));
         return "index";
+    }
+
+    @GetMapping("/teams")
+    public String viewTeamsPage(Model model){
+        PageRequestTest pageRequestTest = new PageRequestTest(0,20);
+        model.addAttribute("teams", teamService.findAllTeams(pageRequestTest));
+        return "indexteams";
+    }
+
+    @GetMapping("/matches")
+    public String viewMatchesPage(Model model){
+        PageRequestTest pageRequestTest = new PageRequestTest(0,20);
+        model.addAttribute("matches", matchService.findAllMatches(pageRequestTest));
+        return "indexmatches";
     }
 
     @GetMapping(value = "deletecomp/{id}")
@@ -48,6 +70,19 @@ public class ThymeleafController {
         Competitor competitor = new Competitor();
         model.addAttribute("competitors", competitor);
         return "create";
+    }
+
+    @GetMapping("/addnewmatchteam")
+    public String addNewMatchTeam(Model model){
+        MatchTeam matchTeam = new MatchTeam();
+        model.addAttribute("matchteams", matchTeam);
+        return "creatematchteam";
+    }
+
+    @PostMapping("/addmatchteam")
+    public String addMatchTeam(@ModelAttribute("matchteams") MatchTeam matchTeam){
+        matchTeamService.save(matchTeam);
+        return "redirect:/";
     }
 
     @GetMapping("/addnewteam")

@@ -6,4 +6,5 @@ import java.util.Optional;
 
 public interface MatchRepository extends CrudRepository<Match,Integer> {
     Optional<Match> findByMatchName (String matchName);
+
 }

@@ -27,21 +27,21 @@ public class TeamController {
         return ResponseEntity.ok(teamService.getTeamById(id));
     }
 
-    @GetMapping("/all")
+    /*@GetMapping("/all")
     public ResponseEntity<List<Team>>getAllTeams(){
         List<Team> teams = teamService.findAllTeams();
         return ResponseEntity.ok(teams);
-    }
+    }*/
 
     @GetMapping("/after/{name}")
     public ResponseEntity<Team> getTeam (@PathVariable final String name) {
         return ResponseEntity.ok(teamService.getTeamByName(name));
     }
 
-    @PutMapping("/addmatch/{teamName}/{matchName}")
+    /*@PutMapping("/addmatch/{teamName}/{matchName}")
     public ResponseEntity<Team> addMatchToTeam(@PathVariable final String teamName, @PathVariable final String matchName){
         return ResponseEntity.ok(teamService.addMatchToTeam(teamName,matchName));
-    }
+    }*/
 
     @PutMapping("/removematch/{teamName}/{matchName}")
     public ResponseEntity<Team> removeMatchFromTeam(@PathVariable final String teamName, @PathVariable final String matchName){

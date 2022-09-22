@@ -1,5 +1,6 @@
 package com.example.javapentalog.SecondModule.services;
 
+import com.example.javapentalog.SecondModule.model.PageRequestTest;
 import com.example.javapentalog.SecondModule.repository.matches.Match;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -21,7 +22,7 @@ public interface MatchService {
 
     Match patchMatchById(@NotNull Integer id, @Valid Match match);
 
-    List<Match> findAllMatches();
+    List<Match> findAllMatches(PageRequestTest pageRequestTest);
 
     void deleteMatchById(@NotNull Integer id);
 }

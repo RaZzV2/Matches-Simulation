@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Competitors</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/tabelstyle.css}"/>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+</head>
+<body>
+<div class="container my-2" align="center">
+    <h3>Matches List</h3>
+    <table style="width:80%" border="1"
+           class = "table table-striped table-responsive-md">
+        <table class="styled-table">
+            <tr>
+                <th scope="col">Match Type</th>
+                <th scope="col">Prize</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="match: ${matches}">
+                <td th:text="${match.matchName}"></td>
+                <td th:text="${match.prize}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="container"><a th:href="@{/}"> Back to Competitor List</a></div>
+
+</body>
+</html>

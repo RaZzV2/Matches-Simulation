@@ -1,5 +1,6 @@
 package com.example.javapentalog.SecondModule.services.impl;
 
+import com.example.javapentalog.SecondModule.model.PageRequestTest;
 import com.example.javapentalog.SecondModule.repository.competitors.Competitor;
 import com.example.javapentalog.SecondModule.repository.matches.Match;
 import com.example.javapentalog.SecondModule.repository.matches.MatchRepository;
@@ -62,7 +63,7 @@ public class MatchServiceImpl  implements MatchService {
     }
 
     @Override
-    public List<Match> findAllMatches() {
+    public List<Match> findAllMatches(PageRequestTest pageRequestTest) {
         return (List<Match>) matchRepository.findAll();
     }
 

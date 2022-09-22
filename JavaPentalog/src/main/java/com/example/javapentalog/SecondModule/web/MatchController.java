@@ -28,11 +28,11 @@ public class MatchController {
         return ResponseEntity.ok(matchService.getMatchById(id));
     }
 
-    @GetMapping("/all")
+    /*@GetMapping("/all")
     public ResponseEntity<List<Match>>getAllMatches(){
         List<Match> matches = matchService.findAllMatches();
         return ResponseEntity.ok(matches);
-    }
+    }*/
 
     @GetMapping("/after/{name}")
     public ResponseEntity<Match> getMatch (@PathVariable final String name) {

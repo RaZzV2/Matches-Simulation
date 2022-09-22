@@ -1,5 +1,6 @@
 package com.example.javapentalog.SecondModule.services;
 
+import com.example.javapentalog.SecondModule.model.PageRequestTest;
 import com.example.javapentalog.SecondModule.repository.teams.Team;
 
 import javax.validation.Valid;
@@ -11,7 +12,7 @@ public interface TeamService {
 
     void save(@Valid Team team);
 
-    Team addMatchToTeam(@NotNull String teamName, @NotNull String matchName);
+   // Team addMatchToTeam(@NotNull Integer teamId, @NotNull Integer matchId);
 
     Team removeMatchFromTeam(@NotNull String teamName, @NotNull String matchName);
 
@@ -27,7 +28,7 @@ public interface TeamService {
 
     Team patchTeamById(@NotNull Integer id, @Valid Team team);
 
-    List<Team> findAllTeams();
+    List<Team> findAllTeams(PageRequestTest pageRequestTest);
 
     void deleteTeamById(@NotNull Integer id);
 }

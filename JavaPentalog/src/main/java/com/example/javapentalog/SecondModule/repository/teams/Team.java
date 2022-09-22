@@ -1,14 +1,14 @@
 package com.example.javapentalog.SecondModule.repository.teams;
 
-import com.example.javapentalog.SecondModule.repository.competitors.Competitor;
-import com.example.javapentalog.SecondModule.repository.matches.Match;
+import com.example.javapentalog.SecondModule.repository.matchteams.MatchTeam;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Data
@@ -18,6 +18,7 @@ public class Team {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "team_id")
     private Integer id;
 
     @Column(unique = true)
@@ -25,10 +26,12 @@ public class Team {
 
     private String description;
 
-    @OneToMany
-    private List<Competitor> competitors;
 
-    @OneToMany
-    private List<Match> matches;
+    @OneToMany(mappedBy="teamField", fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<MatchTeam> matchTeams = new ArrayList<>();
+
+
+
+
 
 }

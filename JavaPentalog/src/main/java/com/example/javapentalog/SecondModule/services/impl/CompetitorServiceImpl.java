@@ -58,7 +58,9 @@ public class CompetitorServiceImpl implements CompetitorService {
         if (competitor.getAge() != null) {
             competitorToUpdate.setAge(competitor.getAge());
         }
-
+        if (competitor.getTeam() != null) {
+            competitorToUpdate.setTeam(competitor.getTeam());
+        }
         return competitorRepository.save(competitorToUpdate);
     }
 
