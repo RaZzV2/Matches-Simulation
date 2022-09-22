@@ -1,5 +1,6 @@
 package com.example.javapentalog.SecondModule.web.rest;
 
+import com.example.javapentalog.SecondModule.PlannedMatch;
 import com.example.javapentalog.SecondModule.model.PageRequestTest;
 import com.example.javapentalog.SecondModule.repository.matches.MatchRepository;
 import com.example.javapentalog.SecondModule.repository.matchteams.MatchTeam;
@@ -12,6 +13,7 @@ import com.example.javapentalog.SecondModule.services.impl.MatchServiceImpl;
 import com.example.javapentalog.SecondModule.services.impl.MatchTeamServiceImpl;
 import com.example.javapentalog.SecondModule.services.impl.TeamServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +36,7 @@ public class ThymeleafController {
     @GetMapping("/")
     public String viewHomePage(Model model){
         PageRequestTest pageRequest = new PageRequestTest(0,20);
+        List<PlannedMatch> matchesByDescOrder = matchTeamService.findMatchesByDescOrder(pageRequest);
         model.addAttribute("competitors",competitorService.findAllCompetitors(pageRequest));
         return "index";
     }
@@ -43,6 +46,13 @@ public class ThymeleafController {
         PageRequestTest pageRequestTest = new PageRequestTest(0,20);
         model.addAttribute("teams", teamService.findAllTeams(pageRequestTest));
         return "indexteams";
+    }
+
+    @GetMapping("/plannedmatches")
+    public String viewPlannedMatchPage(Model model){
+        PageRequestTest pageRequestTest = new PageRequestTest(0,20);
+        model.addAttribute("planned",matchTeamService.findMatchesByDescOrder(pageRequestTest));
+        return "viewplannedmatch";
     }
 
     @GetMapping("/matches")

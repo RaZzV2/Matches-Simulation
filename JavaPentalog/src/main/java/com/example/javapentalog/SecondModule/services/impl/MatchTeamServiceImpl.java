@@ -1,5 +1,6 @@
 package com.example.javapentalog.SecondModule.services.impl;
 
+import com.example.javapentalog.SecondModule.PlannedMatch;
 import com.example.javapentalog.SecondModule.model.PageRequestTest;
 import com.example.javapentalog.SecondModule.repository.matches.Match;
 import com.example.javapentalog.SecondModule.repository.matches.MatchRepository;
@@ -11,7 +12,7 @@ import com.example.javapentalog.SecondModule.services.MatchTeamService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 
 
 @Service
@@ -33,18 +34,16 @@ public class MatchTeamServiceImpl implements MatchTeamService {
             List<MatchTeam> matchTeams = (List<MatchTeam>) matchTeamRepository.findAll();
             boolean duplicate=false;
             for(MatchTeam aux : matchTeams){
-                if(aux.getMatchField().equals(matchTeam.getMatchField()) && aux.getTeamField().equals(matchTeam.getTeamField()))
-                    duplicate=true;
-
+                if(aux.getMatchField().equals(matchTeam.getMatchField()) && aux.getTeamField().equals(matchTeam.getTeamField())) {
+                    duplicate = true;
+                    break;
+                }
             }
             if (!duplicate) {
-                long teamNumber = matchTeams.stream().filter(c -> c.getMatchField().getId().equals(matchTeam.getMatchField().getId())).count();
-                if (teamNumber <= 2) {
                     matchTeamRepository.save(matchTeam);
                 }
             }
         }
-    }
 
     @Override
     public MatchTeam addMatchTeam(MatchTeam matchTeam) {
@@ -55,6 +54,24 @@ public class MatchTeamServiceImpl implements MatchTeamService {
     public List<MatchTeam> findAllMatchTeam(PageRequestTest pageRequestTest) {
         return (List<MatchTeam>) matchTeamRepository.findAll();
     }
+
+    @Override
+    public List<PlannedMatch> findMatchesByDescOrder(PageRequestTest pageRequestTest){
+        Comparator<MatchTeam> compareByMatch = (MatchTeam o1, MatchTeam o2) ->o1.getMatchField().getId().compareTo(o2.getMatchField().getId());
+        List<MatchTeam> matchTeams = (List<MatchTeam>) matchTeamRepository.findAll();
+        matchTeams.sort(compareByMatch);
+        List<PlannedMatch> plannedMatches = new ArrayList<>();
+        int n = matchTeams.size();
+        if(n%2==1)
+            n--;
+            for (int index = 0; index < n; index += 2) {
+                PlannedMatch plannedMatch = null;
+                plannedMatch = new PlannedMatch(matchTeams.get(index), matchTeams.get(index + 1));
+                plannedMatches.add(plannedMatch);
+            }
+          return plannedMatches;
+    }
+
 
     @Override
     public MatchTeam getMatchTeamById(Integer id) {

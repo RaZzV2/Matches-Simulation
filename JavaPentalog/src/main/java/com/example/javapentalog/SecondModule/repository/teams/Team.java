@@ -1,17 +1,19 @@
 package com.example.javapentalog.SecondModule.repository.teams;
 
 import com.example.javapentalog.SecondModule.repository.matchteams.MatchTeam;
-import lombok.Data;
+import lombok.*;
 import lombok.experimental.Accessors;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.Objects;
 
 
-@Data
+@Getter
+@Setter
+@RequiredArgsConstructor
 @Accessors(chain = true)
 @Entity
 public class Team {
@@ -31,7 +33,16 @@ public class Team {
     private List<MatchTeam> matchTeams = new ArrayList<>();
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Team team = (Team) o;
+        return id != null && Objects.equals(id, team.id);
+    }
 
-
-
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
