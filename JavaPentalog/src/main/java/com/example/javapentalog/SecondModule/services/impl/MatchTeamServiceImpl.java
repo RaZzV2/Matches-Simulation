@@ -42,9 +42,12 @@ public class MatchTeamServiceImpl implements MatchTeamService {
                     break;
                 }
             }
-            if (!duplicate) {
+            long teamNumber = matchTeams.stream().filter(c -> c.getMatchField().getId().equals(matchTeam.getMatchField().getId())).count();
+            if(teamNumber<2) {
+                if (!duplicate) {
                     matchTeamRepository.save(matchTeam);
                 }
+            }
             }
         }
 
